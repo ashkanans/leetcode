@@ -11,19 +11,21 @@ def two_sum(nums, target):
     Returns:
     List[int]: A list of two indices whose elements sum up to target.
     """
-    for num1 in nums:
-        for num2 in nums:
-            if num1 + num2 == target and num1 == num2 and nums.count(num1) == 1:
-                print()
-            elif num1 + num2 == target:
-                index1 = nums.index(num1)
-                index2 = nums.index(num2)
-                if index1 == index2:
-                    indecies_of_num1 = [index for index, value in enumerate(nums) if value == num1]
-                    index1 = indecies_of_num1[0]
-                    index2 = indecies_of_num1[1]
-                return [index1, index2]
-    return [-1,-1]
+    num_to_index = {}
+
+    # Loop through the list
+    for index, num in enumerate(nums):
+        # Calculate the complement of the current number
+        complement = target - num
+
+        # Check if the complement is already in the dictionary
+        if complement in num_to_index:
+            # If found, return the indices
+            return [num_to_index[complement], index]
+
+        # Store the index of the current number in the dictionary
+        num_to_index[num] = index
+
 
 
 if __name__ == "__main__":
